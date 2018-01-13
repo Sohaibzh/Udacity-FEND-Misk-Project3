@@ -9,7 +9,7 @@ It's Bascilly An Arcade Game Bulit using JavaScript and HTML and CSS and HTML5 C
 
 1. You Will Start from the Bottom of Game trying to Avoid the **ENEMY obejct** and try to collect the **USFUL Obejct**
 
-- ![Gem Blue](images/Gem Blue.png? raw=true "Gem Blue") **Worth 10pt**
+- ![Gem Blue](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Blue.png) **Worth 10pt**
 - ![Gem Green](images/Gem Green.png? raw=true "Gem Green") **Worth 20pt**
 - ![Gem Orange](images/Gem Orange.png? raw=true "Gem Orange") **Worth 30pt**
 - ![Heart](images/Heart.png? raw=true "Heart") **Incresses your Life by 1**
