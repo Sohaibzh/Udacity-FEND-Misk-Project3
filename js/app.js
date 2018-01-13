@@ -1,8 +1,8 @@
 //Global Var
+'use strict';
 var count = 0;
 var life = 5;
 var score = 0;
-
 // Enemies our player must avoid
 var Enemy = function(x, y, speed, name) {
   // Variables applied to each of our instances go here,
@@ -83,10 +83,6 @@ Player.prototype.render = function() {
 
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   // Return to the Engine.js the Score and the Lifes as Array
-  var temp = [];
-  temp.push(score);
-  temp.push(life);
-  return temp;
 };
 
 // Handle Player Movement
@@ -120,7 +116,7 @@ Player.prototype.handleInput = function(move) {
       this.y = 400;
     }
     // player arrived to the river , increase the score and reposition the player
-    if (this.y >= 0) {
+    if (this.y == 0) {
       score++;
       restPlayer();
     }
@@ -308,7 +304,7 @@ function restPlayer() {
 
 // MODFFIY  the Collectible object with new one
 function newCollectible() {
-
+  var item, place;
   // get random number between two values by calling randomNumber
   item = parseInt(randomNumber(0, 3));
 
@@ -366,7 +362,7 @@ function checkCollisions() {
   // check if the player and Collectible Position
   if (player.x == allCollects[0].x || min == allCollects[0].x) {
     if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100) {
-      switch (this.item) {
+      switch (allCollects[0].item) {
         case 0:
           score += 10;
           break;

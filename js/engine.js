@@ -172,7 +172,7 @@ var Engine = (function(global) {
       enemy.render();
     });
 
-    var temp = player.render();
+    player.render();
     allCollects.forEach(function(collectible) {
       collectible.render();
     });
@@ -182,11 +182,11 @@ var Engine = (function(global) {
     ctx = canvas.getContext("2d");
     ctx.font = "20px Arial";
 
-    ctx.strokeText("Score:" + temp[0] + " pt", 3, 100);
-    ctx.fillText("Score:" + temp[0] + " pt", 3, 100);
+    ctx.strokeText("Score:" + score + " pt", 3, 100);
+    ctx.fillText("Score:" + score + " pt", 3, 100);
 
-    ctx.strokeText("lifes:" + temp[1], 425, 100);
-    ctx.fillText("lifes:" + temp[1], 425, 100);
+    ctx.strokeText("lifes:" + life, 425, 100);
+    ctx.fillText("lifes:" + life, 425, 100);
 
     ctx.font = "13px Arial";
     ctx.strokeStyle = "gray";
