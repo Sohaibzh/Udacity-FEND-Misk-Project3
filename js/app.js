@@ -117,8 +117,8 @@ Player.prototype.handleInput = function(move) {
 
 Player.prototype.restPlayer = function() {
   // Check if the Game END
-  if (player.count >= 5 && player.life <= 0) {
-    alert("Game Over" + "Your Score Is " + player.score);
+  if (this.count >= 5 && this.life <= 0) {
+    alert("Game Over" + "Your Score Is " + this.score);
     this.x = 205;
     this.y = 400;
     this.score = 0;
@@ -128,17 +128,17 @@ Player.prototype.restPlayer = function() {
 
   }
   // if player Still have life left
-  else if (player.life < 5 && player.count == 0) {
-    player.life--;
-    player.x = 205;
-    player.y = 400;
-    player.count++;
+  else if (this.life < 5 && this.count == 0) {
+    this.life--;
+    this.x = 205;
+    this.y = 400;
+    this.count++;
     this.changeCharacter();
 
 
   } else {
-    player.x = 205;
-    player.y = 400;
+    this.x = 205;
+    this.y = 400;
     this.changeCharacter();
     // create new Collectible by call Collectible
     // newCollectible();
@@ -338,7 +338,7 @@ function checkCollisions() {
 
 
   // check if the player in the First Row
-  if (player.y <= 200 && player.y > 150) {
+  if (player.y <= 250 && player.y > 150) {
     // check Enemy Position
     if (parseInt(allEnemies[2].x) <= max && parseInt(allEnemies[2].x) >= min) {
       player.count++;
@@ -392,7 +392,7 @@ function checkCollisions() {
   var max = player.x + 5;
   var min = player.x - 5;
   if (player.x == allCollects[0].x || min == allCollects[0].x) {
-    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100) {
+    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100 || player.y <= 250) {
       switch (allCollects[0].item) {
         case 0:
           player.score += 10;
