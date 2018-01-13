@@ -1,7 +1,7 @@
 # Front-End-Non-Dgree Arcade Game
 Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission.
 
-##Basic Functionality
+## Basic Functionality
 In this game you have a Player and Enemies (Bugs). The goal of the player is to reach the water, without colliding into any one of the enemies. The player can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. Once a the player collides with an enemy, the game is reset and the player moves back to the start square. Once the player reaches the water the game is won.
 
 ## Game OverView
@@ -21,7 +21,7 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 3. You Will Start with 5 lives and 0pts
 
-4. Evrey Time you hit the Eney Your Charactar will change until you finsh all your lives
+4. Evrey Time you hit the Enemey Your Charactar will change until you finsh all your lives
 
  ![char-boy](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-boy.png) 
  ![cat-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-cat-girl.png) 
