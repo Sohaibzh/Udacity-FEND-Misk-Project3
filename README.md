@@ -9,10 +9,14 @@ It's Bascilly An Arcade Game Bulit using JavaScript and HTML and CSS and HTML5 C
 
 1. You Will Start from the Bottom of Game trying to Avoid the **ENEMY obejct** and try to collect the **USFUL Obejct**
 
-![Gem Blue](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Blue.png) **Worth 10pt**
-![Gem Green](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Green.png) **Worth 20pt**
-![Gem Orange](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Orange.png) **Worth 30pt**
-![Heart](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Heart.png) **Incresses your Life by 1**
+![Gem Blue](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Blue.png) 
+**Worth 10pt**
+![Gem Green](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Green.png)
+**Worth 20pt**
+![Gem Orange](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Gem%20Orange.png) 
+**Worth 30pt**
+![Heart](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/Heart.png)
+**Incresses your Life by 1**
 
 2. if land on the river safly you will get one point and restart from the intial postions
 
@@ -20,11 +24,11 @@ It's Bascilly An Arcade Game Bulit using JavaScript and HTML and CSS and HTML5 C
 
 4. Evrey Time you hit the Eney Your Charactar will change until you finsh all your lives
 
- ![char-boy](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-boy.png? raw=true "char-boy") 
- ![cat-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-cat-girl.png? raw=true "cat-girl") 
- ![horn-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-horn-girl.png? raw=true "horn-girl") 
- ![pink-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-pink-girl.png? raw=true "pink-girl") 
-![princess-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-princess-girl.png? raw=true "princess-girl") 
+ ![char-boy](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-boy.png) 
+ ![cat-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-cat-girl.png) 
+ ![horn-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-horn-girl.png) 
+ ![pink-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-pink-girl.png) 
+![princess-girl](https://github.com/Sohaibzh/Udacity-FEND-Misk-Project3/blob/master/images/char-princess-girl.png) 
 
 ## How To Play 
 
