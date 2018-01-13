@@ -1,14 +1,13 @@
 //Global Var
 'use strict';
-var count = 0;
-var life = 5;
-var score = 0;
 // Enemies our player must avoid
-var Enemy = function(x, y, speed, name) {
+var Enemy = function(x, y, speed) {
   // Variables applied to each of our instances go here,
   // we've provided one for you to get started
   // The image/sprite for our enemies, this uses
   // a helper we've provided to easily load images
+  this.width = 101;
+  this.height = 171;
   this.name = name;
   this.speed = speed;
   this.x = x;
@@ -22,11 +21,12 @@ Enemy.prototype.update = function(dt) {
   // You should multiply any movement by the dt parameter
   // which will ensure the game runs at the same speed for
   // all computers.
+  //this.x += this.speed * dt;
   this.x += this.speed * dt;
 
   if (this.x >= 505) {
-    newEnime(this.name);
-
+    this.x = 0;
+    this.speed = randomSpeed();
   }
 
 
@@ -34,7 +34,7 @@ Enemy.prototype.update = function(dt) {
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
 };
 
 
@@ -42,30 +42,16 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function(x, y) {
+
   // Variables applied to each of our instances go here,
+  this.count = 0;
+  this.life = 5;
+  this.score = 0
   this.x = x;
   this.y = y;
+  this.width = 101;
+  this.height = 171;
   // Change The Player Image Based in the count
-  switch (count) {
-    case 0:
-      this.sprite = 'images/char-boy.png';
-      break;
-    case 1:
-      this.sprite = 'images/char-cat-girl.png';
-      break;
-    case 2:
-      this.sprite = 'images/char-horn-girl.png';
-      break;
-    case 3:
-      this.sprite = 'images/char-pink-girl.png';
-      break;
-    case 4:
-      this.sprite = 'images/char-princess-girl.png';
-      break;
-    default:
-      this.sprite = 'images/char-boy.png';
-      break;
-  }
 
 };
 
@@ -81,16 +67,17 @@ Player.prototype.update = function(dt) {
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
 
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  ctx.drawImage(Resources.get(this.changeCharacter()), this.x, this.y, this.width, this.height);
   // Return to the Engine.js the Score and the Lifes as Array
 };
 
 // Handle Player Movement
 Player.prototype.handleInput = function(move) {
   // move the player according the pressed key
+
   switch (move) {
     case 'up':
-      this.y = this.y - 100;
+      this.y = this.y - 50;
       break;
     case 'left':
       this.x = this.x - 100;
@@ -99,7 +86,7 @@ Player.prototype.handleInput = function(move) {
       this.x = this.x + 100;
       break;
     case 'down':
-      this.y = this.y + 100;
+      this.y = this.y + 50;
       break;
   }
 
@@ -117,8 +104,9 @@ Player.prototype.handleInput = function(move) {
     }
     // player arrived to the river , increase the score and reposition the player
     if (this.y == 0) {
-      score++;
-      restPlayer();
+      player.score++;
+      player.restPlayer();
+
     }
   }
 
@@ -126,6 +114,62 @@ Player.prototype.handleInput = function(move) {
 
 
 };
+
+Player.prototype.restPlayer = function() {
+  // Check if the Game END
+  if (player.count >= 5 && player.life <= 0) {
+    alert("Game Over" + "Your Score Is " + player.score);
+    this.x = 205;
+    this.y = 400;
+    this.score = 0;
+    this.count = 0;
+    this.life = 5;
+    this.restPlayer();
+
+  }
+  // if player Still have life left
+  else if (player.life < 5 && player.count == 0) {
+    player.life--;
+    player.x = 205;
+    player.y = 400;
+    player.count++;
+    this.changeCharacter();
+
+
+  } else {
+    player.x = 205;
+    player.y = 400;
+    this.changeCharacter();
+    // create new Collectible by call Collectible
+    // newCollectible();
+  }
+
+
+}
+// change player Charatar
+Player.prototype.changeCharacter = function() {
+  switch (this.count) {
+    case 0:
+      return this.sprite = 'images/char-boy.png';
+
+    case 1:
+      return this.sprite = 'images/char-cat-girl.png';
+
+    case 2:
+      return this.sprite = 'images/char-horn-girl.png';
+
+    case 3:
+      return this.sprite = 'images/char-pink-girl.png';
+
+    case 4:
+      return this.sprite = 'images/char-princess-girl.png';
+
+    default:
+      return this.sprite = 'images/char-boy.png';
+
+  }
+}
+
 
 // Class for the Collectible
 var collectible = function(item, place) {
@@ -265,43 +309,6 @@ function randomSpeed() {
 
 }
 
-// MODFIY the Old Enemy Object to new one
-function newEnime(name) {
-
-  if (name == "e1") {
-    allEnemies[0] = new Enemy(0, 50, randomSpeed(), "e1");
-  } else if (name == "e2") {
-    allEnemies[1] = new Enemy(0, 150, randomSpeed(), "e2");
-  } else {
-    allEnemies[2] = new Enemy(0, 230, randomSpeed(), "e3");
-  }
-
-
-}
-
-// Check for the Player Status
-function restPlayer() {
-  // Check if the Game END
-  if (count >= 5 && life == 0) {
-    alert("Game Over" + "Your Score Is" + score);
-    count = 0;
-    restPlayer();
-  }
-  // if player Still have life left
-  else if (life != 0 && count == 0) {
-    life--;
-    player = new Player(205, 400);
-    // create new Collectible by call Collectible
-    Collectible();
-  } else {
-    player = new Player(205, 400);
-    // create new Collectible by call Collectible
-    newCollectible();
-  }
-
-
-}
-
 // MODFFIY  the Collectible object with new one
 function newCollectible() {
   var item, place;
@@ -325,55 +332,55 @@ function randomNumber(min, max) {
 
 // Check if any Collisions occur
 function checkCollisions() {
-
   // specify the Player current Block
-  var max = player.x + 5;
-  var min = player.x - 5;
+  var max = player.x + 50;
+  var min = player.x - 50;
 
 
   // check if the player in the First Row
   if (player.y <= 200 && player.y > 150) {
     // check Enemy Position
     if (parseInt(allEnemies[2].x) <= max && parseInt(allEnemies[2].x) >= min) {
-      count++;
-      life--;
-      restPlayer()
+      player.count++;
+      player.life--;
+
+      player.restPlayer();
     }
   }
   // check if the player in the Second Row
   else if (player.y <= 150 && player.y >= 100) {
     // check Enemy Position
     if (parseInt(allEnemies[1].x) <= max && parseInt(allEnemies[1].x) >= min) {
-      count++;
-      life--;
-      restPlayer()
+      player.count++;
+      player.life--;
+      player.restPlayer();
     }
   }
   // check if the player in the Third Row
   else if (player.y <= 50 && player.y >= 0) {
     // check Enemy Position
     if (parseInt(allEnemies[0].x) <= max && parseInt(allEnemies[0].x) >= min) {
-      count++;
-      life--;
-      restPlayer()
+      player.count++;
+      player.life--;
+      player.restPlayer();
     }
   }
 
   // check if the player and Collectible Position
   if (player.x == allCollects[0].x || min == allCollects[0].x) {
-    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100) {
+    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100 || player.y + 20 == allCollects[0].y + 5 || player.y == allCollects[0].y + 5) {
       switch (allCollects[0].item) {
         case 0:
-          score += 10;
+          player.score += 10;
           break;
         case 1:
-          score += 20;
+          player.score += 20;
           break;
         case 2:
-          score += 30;
+          player.score += 30;
           break;
         case 3:
-          life++;
+          player.life++;
           break;
 
       }
@@ -382,11 +389,31 @@ function checkCollisions() {
 
     }
   }
+  var max = player.x + 5;
+  var min = player.x - 5;
+  if (player.x == allCollects[0].x || min == allCollects[0].x) {
+    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100) {
+      switch (allCollects[0].item) {
+        case 0:
+          player.score += 10;
+          break;
+        case 1:
+          player.score += 20;
+          break;
+        case 2:
+          player.score += 30;
+          break;
+        case 3:
+          player.life++;
+          break;
+
+      }
+      newCollectible();
 
 
+    }
+  }
 }
-
-
 
 
 // This listens for key presses and sends the keys to your

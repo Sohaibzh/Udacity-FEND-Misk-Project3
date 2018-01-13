@@ -109,7 +109,7 @@ var Engine = (function(global) {
     allEnemies.forEach(function(enemy) {
       enemy.update(dt);
     });
-    player.update();
+    player.update(dt);
 
 
 
@@ -182,11 +182,11 @@ var Engine = (function(global) {
     ctx = canvas.getContext("2d");
     ctx.font = "20px Arial";
 
-    ctx.strokeText("Score:" + score + " pt", 3, 100);
-    ctx.fillText("Score:" + score + " pt", 3, 100);
+    ctx.strokeText("Score:" + player.score + " pt", 3, 100);
+    ctx.fillText("Score:" + player.score + " pt", 3, 100);
 
-    ctx.strokeText("lifes:" + life, 425, 100);
-    ctx.fillText("lifes:" + life, 425, 100);
+    ctx.strokeText("lifes:" + player.life, 425, 100);
+    ctx.fillText("lifes:" + player.life, 425, 100);
 
     ctx.font = "13px Arial";
     ctx.strokeStyle = "gray";
