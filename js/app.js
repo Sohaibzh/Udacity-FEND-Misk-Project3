@@ -24,6 +24,7 @@ Enemy.prototype.update = function(dt) {
   //this.x += this.speed * dt;
   this.x += this.speed * dt;
 
+  // if player arrived to the river 
   if (this.x >= 505) {
     this.x = 0;
     this.speed = randomSpeed();
@@ -46,21 +47,12 @@ var Player = function(x, y) {
   // Variables applied to each of our instances go here,
   this.count = 0;
   this.life = 5;
-  this.score = 0
+  this.score = 0;
   this.x = x;
   this.y = y;
   this.width = 101;
   this.height = 171;
   // Change The Player Image Based in the count
-
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Player.prototype.update = function(dt) {
-  // You should multiply any movement by the dt parameter
-  // which will ensure the game runs at the same speed for
-  // all computers.
 
 };
 
@@ -97,15 +89,16 @@ Player.prototype.handleInput = function(move) {
       this.x = 405;
     }
     if (this.x < 0) {
-      this.x = 0;
+      this.x = 5;
     }
     if (this.y > 400) {
       this.y = 400;
     }
     // player arrived to the river , increase the score and reposition the player
     if (this.y == 0) {
-      player.score++;
-      player.restPlayer();
+      this.score++;
+      this.x = 205;
+      this.y = 400;
 
     }
   }
@@ -114,39 +107,28 @@ Player.prototype.handleInput = function(move) {
 
 
 };
-
+// reposition the player
 Player.prototype.restPlayer = function() {
-  // Check if the Game END
-  if (this.count >= 5 && this.life <= 0) {
-    alert("Game Over" + "Your Score Is " + this.score);
+  if (this.life > 0) {
+    this.x = 205;
+    this.y = 400;
+
+  } else if (this.life <= 0) {
     this.x = 205;
     this.y = 400;
     this.score = 0;
     this.count = 0;
     this.life = 5;
-    this.restPlayer();
+    alert("Game Over Your Score is " + this.score);
+  } else if (this.count < 4) {
+    this.count = 0;
 
   }
-  // if player Still have life left
-  else if (this.life < 5 && this.count == 0) {
-    this.life--;
-    this.x = 205;
-    this.y = 400;
-    this.count++;
-    this.changeCharacter();
 
 
-  } else {
-    this.x = 205;
-    this.y = 400;
-    this.changeCharacter();
-    // create new Collectible by call Collectible
-    // newCollectible();
-  }
 
-
-}
-// change player Charatar
+};
+// change player Charactar
 Player.prototype.changeCharacter = function() {
   switch (this.count) {
     case 0:
@@ -168,7 +150,7 @@ Player.prototype.changeCharacter = function() {
       return this.sprite = 'images/char-boy.png';
 
   }
-}
+};
 
 
 // Class for the Collectible
@@ -178,9 +160,17 @@ var collectible = function(item, place) {
   // Item decide which item to create
   this.place = place;
   this.item = item;
+  this.width = 50;
+  this.height = 70;
+  this.x = 505;
+  this.y = 500;
 
-
-  // choice the item based on the item number
+  var xValues = [30, 130, 230, 330, 430];
+  var yValues = [120, 210, 290];
+  // return random numbers
+  this.x = xValues[Math.floor(Math.random() * xValues.length)];
+  this.y = yValues[Math.floor(Math.random() * yValues.length)];
+  // select image for the collectable 
   switch (this.item) {
     case 0:
       this.sprite = 'images/Gem Blue.png';
@@ -200,68 +190,51 @@ var collectible = function(item, place) {
   }
 
 
+  // choice the item based on the item number
+
+
+
 };
 
 
 // Draw the enemy on the screen, required method for game
 collectible.prototype.render = function() {
+// choice the position based on the place number
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y, this.width, this.height);
+};
+//repostion the collectible
+collectible.prototype.newPlace = function(place) {
+  
+  var xValues = [30, 130, 230, 330, 430];
+  var yValues = [120, 210, 290];
 
+  // return random numbers
+  this.x = xValues[Math.floor(Math.random() * xValues.length)];
+  this.y = yValues[Math.floor(Math.random() * yValues.length)];
 
-  // choice the position based on the place number
-  switch (this.place) {
+  this.item = randomNumber(0, 3);
+  // select image for the collectable 
+  switch (this.item) {
     case 0:
-      this.x = 400, this.y = 50;
+      this.sprite = 'images/Gem Blue.png';
       break;
     case 1:
-      this.x = 0, this.y = 200;
+      this.sprite = 'images/Gem Green.png';
       break;
     case 2:
-      this.x = 100, this.y = 200;
+      this.sprite = 'images/Gem Orange.png';
       break;
     case 3:
-      this.x = 200, this.y = 200;
+      this.sprite = 'images/Heart.png';
       break;
-    case 4:
-      this.x = 300, this.y = 200;
+    default:
+      this.sprite = 'images/Gem Blue.png';
       break;
-    case 5:
-      this.x = 400, this.y = 200;
-      break;
-    case 6:
-      this.x = 0, this.y = 120;
-      break;
-    case 7:
-      this.x = 100, this.y = 120;
-      break;
-    case 8:
-      this.x = 200, this.y = 120;
-      break;
-    case 9:
-      this.x = 300, this.y = 120;
-      break;
-    case 10:
-      this.x = 400, this.y = 120;
-      break;
-    case 11:
-      this.x = 0, this.y = 50;
-      break;
-    case 12:
-      this.x = 100, this.y = 50;
-      break;
-    case 13:
-      this.x = 200, this.y = 50;
-      break;
-    case 14:
-      this.x = 300, this.y = 50;
-      break;
-    case 15:
-      this.x = 500, this.y = 606;
-      break;
-
-
   }
 
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+
+  this.render();
+
 };
 
 
@@ -286,14 +259,12 @@ allEnemies.push(enemy3);
 var player = new Player(205, 400);
 
 
-
-
 // Create Collectibles Array
-var allCollects = [];
-// Create collectible Object
+
+
 var collect = new collectible(randomNumber(0, 4), randomNumber(0, 15));
 // Push  collectible Object
-allCollects.push(collect);
+
 
 
 
@@ -317,9 +288,8 @@ function newCollectible() {
 
   // get random number between two values by calling randomNumber
   place = parseInt(randomNumber(0, 14));
-
-
-  allCollects[0] = new collectible(item, place);
+  collect.item = item;
+  collect.place = place;
 
 }
 
@@ -335,22 +305,32 @@ function checkCollisions() {
   // specify the Player current Block
   var max = player.x + 50;
   var min = player.x - 50;
+  var collectibleImage = 0;
 
 
   // check if the player in the First Row
   if (player.y <= 250 && player.y > 150) {
+
     // check Enemy Position
+    if (collect.x >= min && collect.x <= max && collect.y == 290) {
+      randomCollectible();
+    }
     if (parseInt(allEnemies[2].x) <= max && parseInt(allEnemies[2].x) >= min) {
       player.count++;
       player.life--;
-
       player.restPlayer();
+
     }
   }
+
   // check if the player in the Second Row
   else if (player.y <= 150 && player.y >= 100) {
     // check Enemy Position
+    if (collect.x >= min && collect.x <= max && collect.y == 210) {
+      randomCollectible();
+    }
     if (parseInt(allEnemies[1].x) <= max && parseInt(allEnemies[1].x) >= min) {
+
       player.count++;
       player.life--;
       player.restPlayer();
@@ -358,62 +338,55 @@ function checkCollisions() {
   }
   // check if the player in the Third Row
   else if (player.y <= 50 && player.y >= 0) {
+    if (collect.x >= min && collect.x <= max && collect.y == 120) {
+      randomCollectible();
+    }
     // check Enemy Position
     if (parseInt(allEnemies[0].x) <= max && parseInt(allEnemies[0].x) >= min) {
+
       player.count++;
       player.life--;
       player.restPlayer();
-    }
-  }
-
-  // check if the player and Collectible Position
-  if (player.x == allCollects[0].x || min == allCollects[0].x) {
-    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100 || player.y + 20 == allCollects[0].y + 5 || player.y == allCollects[0].y + 5) {
-      switch (allCollects[0].item) {
-        case 0:
-          player.score += 10;
-          break;
-        case 1:
-          player.score += 20;
-          break;
-        case 2:
-          player.score += 30;
-          break;
-        case 3:
-          player.life++;
-          break;
-
-      }
-      newCollectible();
-
 
     }
+
   }
-  var max = player.x + 5;
-  var min = player.x - 5;
-  if (player.x == allCollects[0].x || min == allCollects[0].x) {
-    if (player.y == allCollects[0].y || player.y + 20 == allCollects[0].y || player.y == 0 || player.y == 100 || player.y <= 250) {
-      switch (allCollects[0].item) {
-        case 0:
-          player.score += 10;
-          break;
-        case 1:
-          player.score += 20;
-          break;
-        case 2:
-          player.score += 30;
-          break;
-        case 3:
-          player.life++;
-          break;
 
-      }
-      newCollectible();
-
-
-    }
-  }
 }
+
+
+
+
+function randomCollectible() {
+  // check if the player and Collectible Position
+
+  // collision detected!
+
+  switch (collect.item) {
+    case 0:
+      player.score += 10;
+      collect.newPlace();
+      break;
+    case 1:
+      player.score += 20;
+      collect.newPlace();
+      break;
+    case 2:
+      player.score += 30;
+      collect.newPlace();
+      break;
+
+    case 3:
+      player.life++;
+      collect.newPlace();
+      break;
+  }
+
+
+
+
+}
+
 
 
 // This listens for key presses and sends the keys to your

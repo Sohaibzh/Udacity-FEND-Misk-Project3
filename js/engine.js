@@ -109,7 +109,7 @@ var Engine = (function(global) {
     allEnemies.forEach(function(enemy) {
       enemy.update(dt);
     });
-    player.update(dt);
+    
 
 
 
@@ -173,9 +173,9 @@ var Engine = (function(global) {
     });
 
     player.render();
-    allCollects.forEach(function(collectible) {
-      collectible.render();
-    });
+   
+    collect.render();
+    
     // Draw Text in the Canvas
     // Display Score Life
     canvas = document.getElementById("myCanvas");
